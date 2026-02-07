@@ -6,12 +6,11 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 00:02:03 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 00:49:38 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 03:57:52 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
-#include "libft.h"
 
 void	error_exit(t_error err, const char *target)
 {

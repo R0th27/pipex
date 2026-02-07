@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:53:54 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 00:49:47 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 03:57:46 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "libft.h"
 
 typedef enum e_error
 {

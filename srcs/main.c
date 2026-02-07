@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 11:47:05 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 00:55:22 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 04:12:09 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,17 @@
 
 int	pipex(int argc, char **argv, char **envp)
 {
+	char	**cmd;
+	char	*path;
+
 	if (argc < 5)
-		error_exit(ERR_USAGE, "hi");
+		error_exit(ERR_USAGE, NULL);
+	cmd = ft_split(argv[1], ' ');
+	path = resolve_path(cmd[0], envp);
+	if (path)
+		printf("%s\n", path);
+	free_split(cmd);
+	free(path);
 	(void)argv;
 	(void)envp;
 	return (0);

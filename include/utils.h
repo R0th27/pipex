@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 01:10:06 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 03:18:15 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/08 03:15:58 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/08 04:07:39 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/types.h>
+# include "libft.h"
 
-# include "error.h"
-# include "utils.h"
-
-int	pipex(int argc, char **argv, char **envp);
+char	*join_path(const char *path, const char *cmd);
+char	*resolve_path(const char *cmd, char **envp);
+void	free_split(char **arr);
 
 #endif
