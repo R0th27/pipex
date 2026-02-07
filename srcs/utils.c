@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 03:20:17 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 04:11:54 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 04:31:56 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ char	*join_path(const char *path, const char *cmd)
 	return (full_path);
 }
 
+char	**path_list(char **envp)
+{
+	int		i;
+	char	**paths;
+
+	i = 0;
+	while (envp[i] && !ft_strnstr(envp[i], "PATH=", 5))
+		i++;
+	if (!envp[i])
+		return (NULL);
+	paths = ft_split(envp[i] + 5, ':');
+	return (paths);
+}
+
 char	*resolve_path(const char *cmd, char **envp)
 {
 	char	**paths;
@@ -31,12 +45,9 @@ char	*resolve_path(const char *cmd, char **envp)
 
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
-	i = 0;
-	while (envp[i] && !ft_strnstr(envp[i], "PATH=", 5))
-		i++;
-	if (!envp[i])
+	paths = path_list(envp);
+	if (!paths)
 		return (NULL);
-	paths = ft_split(envp[i] + 5, ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -45,8 +56,7 @@ char	*resolve_path(const char *cmd, char **envp)
 			return (free_split(paths), candidate);
 		free(candidate);
 	}
-	free_split(paths);
-	return (NULL);
+	return (free_split(paths), NULL);
 }
 
 void	free_split(char **arr)
