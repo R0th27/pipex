@@ -6,32 +6,14 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 00:02:03 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 03:57:52 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 05:23:46 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 
-void	error_exit(t_error err, const char *target)
-{
-	int	code;
-
-	if (err == ERR_USAGE)
-	{
-		ft_putstr_fd("Usage: ./pipex file1 cmd1 cmd2 file2\n", STDERR_FILENO);
-		exit (1);
-	}
-	else if (target)
-		perror(target);
-	else
-		perror("pipex");
-	code = shell_error_code_from_errno(errno);
-	exit(code);
-}
-
 int	error_return(t_error err, const char *target)
 {
-	(void)err;
 	if (err == ERR_USAGE)
 	{
 		ft_putstr_fd("Usage: ./pipex file1 cmd1 cmd2 file2\n", STDERR_FILENO);

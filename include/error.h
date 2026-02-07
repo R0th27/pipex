@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:53:54 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 03:57:46 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 05:23:52 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef enum e_error
 	ERR_EXEC
 }	t_error;
 
-void	error_exit(t_error err, const char *target);
 int		error_return(t_error err, const char *target);
 int		shell_error_code_from_errno(int err);
 

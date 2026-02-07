@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 04:37:49 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 05:01:59 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 05:28:30 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <stdlib.h>
 # include "libft.h"
 # include "utils.h"
+# include "error.h"
 
 typedef struct s_cmd
 {
-	char	**cmd_argv;
+	char	**argv;
 	char	*path;
 	int		in_fd;
 	int		out_fd;

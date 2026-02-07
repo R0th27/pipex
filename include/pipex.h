@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 01:10:06 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 04:57:31 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 05:25:21 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 
 # include "error.h"
 # include "utils.h"

@@ -6,28 +6,40 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 11:47:05 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 05:00:20 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 05:56:56 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "libft.h"
 
+void	create_child(t_cmd *cmd, char **envp)
+{
+	int	pid;
+	int	status;
+
+	pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0)
+		exec_cmd(cmd, envp);
+	else
+	{
+		waitpid(pid, &status, 0);
+		printf("status: %d\n", status >> 8);
+	}
+}
+
 int	pipex(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd;
-	int		i;
 
 	if (argc < 5)
-		error_exit(ERR_USAGE, NULL);
+		return (error_return(ERR_USAGE, NULL));
 	cmd = cmd_create(argv[1], envp);
-	i = 0;
-	while (cmd -> cmd_argv[i])
-		printf("%s\n", cmd -> cmd_argv[i++]);
-	if (cmd -> path)
-		printf("%s\n", cmd -> path);
-	printf("%d\n", cmd -> in_fd);
-	printf("%d\n", cmd -> out_fd);
+	if (!cmd)
+		return (1);
+	create_child(cmd, envp);
 	cmd_destroy(cmd);
 	(void)argv;
 	(void)envp;
