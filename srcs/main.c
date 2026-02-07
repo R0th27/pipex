@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 01:10:06 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 01:10:09 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/04 11:47:05 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/08 00:55:22 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-
-# include "error.h"
-
-typedef enum e_input_type
+int	pipex(int argc, char **argv, char **envp)
 {
-	INFILE,
-	HEREDOC
-}	t_input_type;
+	if (argc < 5)
+		error_exit(ERR_USAGE, "hi");
+	(void)argv;
+	(void)envp;
+	return (0);
+}
 
-int	pipex(int argc, char **argv, char **envp);
+int	main(int argc, char **argv, char **envp)
+{
+	int	status;
 
-#endif
+	status = pipex(argc, argv, envp);
+	return (status);
+}

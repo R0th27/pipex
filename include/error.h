@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 01:10:06 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 01:10:09 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/07 23:53:54 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/08 00:49:47 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef ERROR_H
+# define ERROR_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
 # include <errno.h>
-# include <fcntl.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-# include "error.h"
-
-typedef enum e_input_type
+typedef enum e_error
 {
-	INFILE,
-	HEREDOC
-}	t_input_type;
+	ERR_OK,
+	ERR_USAGE,
+	ERR_PIPE,
+	ERR_FORK,
+	ERR_MALLOC,
+	ERR_DUP,
+	ERR_INFILE,
+	ERR_OUTFILE,
+	ERR_CMD_NOT_FOUND,
+	ERR_CMD_NO_EXEC,
+	ERR_CMD_IS_DIR,
+	ERR_EXEC
+}	t_error;
 
-int	pipex(int argc, char **argv, char **envp);
+void	error_exit(t_error err, const char *target);
+int		error_return(t_error err, const char *target);
+int		shell_error_code_from_errno(int err);
 
 #endif

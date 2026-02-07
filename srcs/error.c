@@ -1,0 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/08 00:02:03 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/08 00:49:38 by htoe             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "error.h"
+#include "libft.h"
+
+void	error_exit(t_error err, const char *target)
+{
+	int	code;
+
+	if (err == ERR_USAGE)
+	{
+		ft_putstr_fd("Usage: ./pipex file1 cmd1 cmd2 file2\n", STDERR_FILENO);
+		exit (1);
+	}
+	else if (target)
+		perror(target);
+	else
+		perror("pipex");
+	code = shell_error_code_from_errno(errno);
+	exit(code);
+}
+
+int	error_return(t_error err, const char *target)
+{
+	(void)err;
+	if (err == ERR_USAGE)
+	{
+		ft_putstr_fd("Usage: ./pipex file1 cmd1 cmd2 file2\n", STDERR_FILENO);
+		return (1);
+	}
+	if (target)
+		perror(target);
+	else
+		perror("pipex");
+	return (shell_error_code_from_errno(errno));
+}
+
+int	shell_error_code_from_errno(int err)
+{
+	if (err == ENOENT)
+		return (127);
+	else if (err == EACCES || err == EISDIR)
+		return (126);
+	return (1);
+}
