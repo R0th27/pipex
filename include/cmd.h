@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 01:10:06 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 04:57:31 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/08 04:37:49 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/08 05:01:59 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef CMD_H
+# define CMD_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/types.h>
-
-# include "error.h"
+# include "libft.h"
 # include "utils.h"
-# include "cmd.h"
 
-int	pipex(int argc, char **argv, char **envp);
+typedef struct s_cmd
+{
+	char	**cmd_argv;
+	char	*path;
+	int		in_fd;
+	int		out_fd;
+}	t_cmd;
+
+t_cmd	*cmd_create(char *cmd_str, char **envp);
+void	cmd_destroy(t_cmd *cmd);
+void	exec_cmd(t_cmd *cmd, char **envp);
 
 #endif
