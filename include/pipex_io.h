@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.h                                              :+:      :+:    :+:   */
+/*   pipex_io.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 04:37:49 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 05:28:30 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/08 06:05:11 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/08 07:51:07 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMD_H
-# define CMD_H
+#ifndef PIPEX_IO_H
+# define PIPEX_IO_H
 
+# include <fcntl.h>
 # include <unistd.h>
-# include <stdlib.h>
+# include <stddef.h>
 # include "libft.h"
-# include "utils.h"
-# include "error.h"
 
-typedef struct s_cmd
+typedef enum e_input_type
 {
-	char	**argv;
-	char	*path;
-	int		in_fd;
-	int		out_fd;
-}	t_cmd;
+	INPUT_FILE,
+	INPUT_HEREDOC
+}	t_input_type;
 
-t_cmd	*cmd_create(char *cmd_str, char **envp);
-void	cmd_destroy(t_cmd *cmd);
-void	exec_cmd(t_cmd *cmd, char **envp);
+int	open_infile(const char *path);
+int	open_outfile(const char *path, int append);
+int	setup_input_fd(t_input_type type, const char *arg);
+int	setup_output_fd(t_input_type type, const char *arg);
+int	heredoc_read(const char *limiter);
 
 #endif

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   pipex_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 04:40:15 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 05:55:03 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 07:57:13 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "pipex_cmd.h"
 
 t_cmd	*cmd_create(char *cmd_str, char **envp)
 {
@@ -45,14 +45,12 @@ void	exec_cmd(t_cmd *cmd, char **envp)
 	if (!cmd -> path)
 	{
 		errno = ENOENT;
-		code = shell_error_code_from_errno(errno);
-		error_return(ERR_CMD_NOT_FOUND, cmd -> argv[0]);
+		code = error_return(ERR_CMD_NOT_FOUND, cmd -> argv[0]);
 		cmd_destroy(cmd);
 		exit(code);
 	}
 	execve(cmd -> path, cmd -> argv, envp);
-	code = shell_error_code_from_errno(errno);
-	error_return(ERR_EXEC, cmd -> argv[0]);
+	code = error_return(ERR_EXEC, cmd -> argv[0]);
 	cmd_destroy(cmd);
 	exit(code);
 }

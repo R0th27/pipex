@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   pipex_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 03:15:58 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 04:27:52 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 07:50:48 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PIPEX_UTILS_H
+# define PIPEX_UTILS_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# include <stdio.h>
 
 char	*join_path(const char *path, const char *cmd);
 char	**path_list(char **envp);
