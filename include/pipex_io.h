@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 06:05:11 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 07:51:07 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 08:55:41 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stddef.h>
 # include "libft.h"
+# include "pipex_error.h"
 
 typedef enum e_input_type
 {

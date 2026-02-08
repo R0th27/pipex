@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 06:05:31 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 08:19:24 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 09:06:43 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,40 @@ int	open_outfile(const char *path, int append)
 {
 	if (append)
 		return (open(path, O_CREAT | O_WRONLY | O_APPEND, 0644));
-	else
-		return (open(path, O_CREAT | O_WRONLY | O_TRUNC, 0644));
+	return (open(path, O_CREAT | O_WRONLY | O_TRUNC, 0644));
 }
 
 int	setup_input_fd(t_input_type type, const char *arg)
 {
+	int			fd;
+	const char	*infile;
+
 	if (type == INPUT_HEREDOC)
-		return (heredoc_read(arg));
-	return (open_infile(arg));
+	{
+		fd = heredoc_read(arg);
+		infile = "here_doc";
+	}
+	else
+	{
+		fd = open_infile(arg);
+		infile = arg;
+	}
+	if (fd < 0)
+		return (error_return(ERR_INFILE, infile), -1);
+	return (fd);
 }
 
 int	setup_output_fd(t_input_type type, const char *arg)
 {
+	int	fd;
+
 	if (type == INPUT_HEREDOC)
-		return (open_outfile(arg, 1));
-	return (open_outfile(arg, 0));
+		fd = open_outfile(arg, 1);
+	else
+		fd = open_outfile(arg, 0);
+	if (fd < 0)
+		return (error_return(ERR_OUTFILE, arg), -1);
+	return (fd);
 }
 
 int	heredoc_read(const char *limiter)
@@ -60,5 +78,6 @@ int	heredoc_read(const char *limiter)
 	free(line);
 	close(fd);
 	fd = open("pipex_tmp", O_RDONLY);
+	unlink("pipex_tmp");
 	return (fd);
 }

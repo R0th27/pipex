@@ -1,4 +1,0 @@
-abcdef
-ghi
-jkl
-mnop

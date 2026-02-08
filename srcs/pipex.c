@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 11:47:05 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/08 08:20:21 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/08 08:59:31 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	file_test(int ac, char **av)
 	int				infile;
 	int				outfile;
 
-	type = INPUT_HEREDOC;
+	type = INPUT_FILE;
 	infile = setup_input_fd(type, av[1]);
 	outfile = setup_output_fd(type, av[ac - 1]);
 	printf("infile %d\n", infile);
@@ -49,7 +49,7 @@ int	pipex(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		return (error_return(ERR_USAGE, NULL));
-	cmd = cmd_create(argv[1], envp);
+	cmd = cmd_create(argv[2], envp);
 	if (!cmd)
 		return (1);
 	create_child(cmd, envp);
