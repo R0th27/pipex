@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:22 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 12:32:10 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 17:29:10 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ typedef enum e_input_type
 	INPUT_FILE,
 	INPUT_HEREDOC
 }	t_input_type;
+
+typedef struct s_token
+{
+	int	in_sq;
+	int	in_word;
+	int	count;
+	int	i;
+}	t_token;
 
 typedef struct s_cmd
 {

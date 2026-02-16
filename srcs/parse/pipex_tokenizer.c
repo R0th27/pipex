@@ -5,50 +5,60 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/16 11:20:49 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 13:18:13 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/16 16:58:45 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/16 17:43:54 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	count_token(char *s, t_parse_case *state)
+t_parse_case	count_token(char *str, t_token *token)
 {
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (s[i])
+	while (str[++token->i])
 	{
-		count++;
-		if (s[i] == '\'')
-			single_quotes_skip(s, &i, state);
-		else if (s[i] == ' ')
-		{
-			space_skip(s, &i, state);
-			count--;
-		}
+		if (!token->in_sq && str[token->i] == ' ')
+			token->in_word = 0;
 		else
-			normal_skip(s, &i, state);
-		if (*state != PARSE_OK)
-			return (0);
-		if (s[i])
-			i++;
+		{
+			if (!token->in_word && ++token->count)
+				token->in_word = 1;
+			if (str[token->i] == '\'')
+				token->in_sq = !token->in_sq;
+			else if (str[token->i] == '\\' && !token->in_sq)
+			{
+				if (!str[token->i + 1])
+					return (PARSE_BACKSLASH);
+				token->i++;
+			}
+		}
 	}
-	return (*state = PARSE_OK, count);
+	if (token->in_sq)
+		return (PARSE_UNCLOSED_QUOTE);
+	return (PARSE_OK);
 }
 
-char	**tokenizer(char *cmd_str)
+int	token_counter(char *str, t_parse_case *state)
 {
-	char			**tokens;
+	t_token			token;
+
+	token.in_sq = 0;
+	token.in_word = 0;
+	token.count = 0;
+	token.i = -1;
+	*state = count_token(str, &token);
+	if (*state != PARSE_OK)
+		return (0);
+	return (token.count);
+}
+
+char	**cmd_tokenizer(char *cmd_str)
+{
+	char			**argv;
 	int				token_count;
 	t_parse_case	state;
 
-	state = PARSE_OK;
-	token_count = count_token(cmd_str, &state);
+	token_count = token_counter(cmd_str, &state);
 	printf("token count: %d\n", token_count);
-	(void)state;
-	tokens = NULL;
-	return (tokens);
+	argv = NULL;
+	return (argv);
 }

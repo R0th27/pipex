@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 13:16:10 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 16:59:02 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,8 @@
 # include <sys/wait.h>
 
 //parse
-char	**tokenizer(char *cmd_str);
+char	**cmd_tokenizer(char *cmd_str);
 
-//skip
-void	space_skip(char *s, int *index, t_parse_case *state);
-void	single_quotes_skip(char *s, int *index, t_parse_case *state);
-void	backslash_skip(char *s, int *index, t_parse_case *state);
-void	normal_skip(char *s, int *index, t_parse_case *state);
+//token_count
 
 #endif
