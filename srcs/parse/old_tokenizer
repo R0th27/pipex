@@ -1,0 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_tokenizer.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 22:00:20 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/16 00:13:54 by htoe             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pipex.h"
+
+void	free_matrix(char ***array)
+{
+	int	i;
+
+	if (!*array)
+		return ;
+	i = 0;
+	while ((*array)[i])
+		free((*array)[i++]);
+	free(*array);
+	*array = NULL;
+}
+
+char	*build_token(int *index, char *cmd_str, t_error *err, int left)
+{
+	int		i;
+	char	*token;
+	char	*token_actual;
+	int		in_single_quote;
+
+	token = (char *)malloc(sizeof(char) * (left + 1));
+	if (!left)
+		return (NULL);
+	if (!token)
+		return (NULL);
+	in_single_quote = 0;
+	i = 0;
+	while (cmd_str[*index])
+	{
+		if (cmd_str[*index] == 39)
+			in_single_quote = 1;
+		if (!in_single_quote && cmd_str[*index] != ' ')
+			token[i] = cmd_str[*index];
+		if (!in_single_quote && cmd_str[*index] == ' ')
+			break;
+		if (in_single_quote && cmd_str[*index] != 39)
+			token[i] = cmd_str[*index];
+		if (in_single_quote && cmd_str[*index] == 39)
+			in_single_quote = 0;
+		if (cmd_str[*index])
+		{
+			(*index)++;
+			i++;			
+		}
+	}
+	token[i] = '\0';
+	token_actual = ft_strdup(token);
+	return (*err = ERR_OK, token_actual);
+}
+
+char	**tokenizer(char *cmd_str)
+{
+	char	**tokens;
+	int		strlen;
+	int		i;
+	int		index;
+	t_error	err;
+
+	strlen = ft_strlen(cmd_str);
+	tokens = (char **)malloc(sizeof(char *) * (strlen + 1));
+	if (!tokens)
+		return (NULL);
+	err = ERR_OK;
+	i = 0;
+	index = 0;
+	while (true)
+	{
+		tokens[i] = build_token(&index, cmd_str, &err, strlen - index);
+		if (err != ERR_OK)
+			return (free_matrix(&tokens), NULL);
+		else if (!tokens[i])
+			break ;
+		i++;
+	}
+	return (tokens);
+}

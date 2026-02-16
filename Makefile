@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 14:28:26 by htoe              #+#    #+#              #
-#    Updated: 2026/02/03 14:41:38 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/15 23:00:40 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCDIR = srcs
 OBJDIR = objs
 
 #Sources
-SRCS = ${wildcard ${SRCDIR}/*.c}
+SRCS = ${wildcard ${SRCDIR}/*.c} \
+		${wildcard ${SRCDIR}/*/*.c}
 OBJS = ${SRCS:${SRCDIR}/%.c=${OBJDIR}/%.o}
 LIBS = libft/libft.a
 
