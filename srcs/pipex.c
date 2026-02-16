@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:37 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 00:19:30 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 12:51:30 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	**cmds;
 	int		i;
-	t_parse_error	err;
 
 	if (argc < 2)
 		return (1);
-	cmds = parse_command((argv + 1)[0], &err);
+	cmds = tokenizer(argv[1]);
 	if (!cmds)
 		return (1);
 	i = 0;

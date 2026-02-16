@@ -6,19 +6,20 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:22 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 00:18:32 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 12:32:10 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_TYPES_H
 # define PIPEX_TYPES_H
 
-typedef enum e_parse_error
+typedef enum e_parse_case
 {
 	PARSE_OK,
 	PARSE_UNCLOSED_QUOTE,
+	PARSE_BACKSLASH,
 	PARSE_MALLOC_FAIL
-}	t_parse_error;
+}	t_parse_case;
 
 typedef enum e_input_type
 {
