@@ -6,13 +6,13 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 16:58:45 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:22:21 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 18:24:53 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-t_parse_case	count_token(char *str, t_token *token)
+static t_parse_case	count_token(char *str, t_token *token)
 {
 	while (str[++token->i])
 	{
@@ -40,7 +40,7 @@ t_parse_case	count_token(char *str, t_token *token)
 	return (PARSE_OK);
 }
 
-int	token_counter(char *str, t_parse_case *state)
+static int	token_counter(char *str, t_parse_case *state)
 {
 	t_token			token;
 
@@ -54,20 +54,7 @@ int	token_counter(char *str, t_parse_case *state)
 	return (token.count);
 }
 
-void	free_array(char ***arr)
-{
-	int	i;
-
-	if (!*arr)
-		return ;
-	i = 0;
-	while ((*arr)[i])
-		free((*arr)[i++]);
-	free(*arr);
-	*arr = NULL;
-}
-
-char	*build_cmd_argv(char *s, int *i, t_parse_case *state)
+static char	*build_cmd_argv(char *s, int *i, t_parse_case *state)
 {
 	char	*buffer;
 	t_token	token;

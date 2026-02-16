@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:22 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 17:29:10 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 18:31:51 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ typedef enum e_parse_case
 	PARSE_MALLOC_FAIL
 }	t_parse_case;
 
-typedef enum e_input_type
+typedef enum e_in_type
 {
 	INPUT_FILE,
 	INPUT_HEREDOC
-}	t_input_type;
+}	t_in_type;
 
 typedef struct s_token
 {
@@ -43,11 +43,11 @@ typedef struct s_cmd
 
 typedef struct s_pipeline
 {
-	t_cmd			*cmds;
-	int				cmd_counts;
-	t_input_type	io_type;
-	int				infile;
-	int				outfile;
+	t_cmd		*cmds;
+	int			cmd_counts;
+	t_in_type	io_type;
+	int			infile;
+	int			outfile;
 }	t_pipeline;
 
 #endif

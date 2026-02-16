@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 16:59:02 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 18:34:18 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,20 @@
 # include <sys/wait.h>
 
 //parse
-char	**cmd_tokenizer(char *cmd_str);
+char		**cmd_tokenizer(char *cmd_str);
 
-//token_count
+//error
+void		error_usage(void);
+void		error_print(const char *target, const char *message);
+void		error_perror(const char *target);
+int			error_code_from_errno(int err);
+
+
+//utils
+t_in_type	detect_input_type(const char *arg);
+int			heredoc_read(int fd, const char *limiter);
+
+//free_up
+void		free_array(char ***arr);
 
 #endif

@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_freeup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/15 21:58:37 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:34:33 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/16 18:24:41 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/16 18:24:55 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	usage_check(int argc, char **argv)
+void	free_array(char ***arr)
 {
-	if (argc < 5 || (detect_input_type(argv[1]) == INPUT_HEREDOC && argc < 6))
-	{
-		error_usage();
-		exit(1);
-	}
-}
+	int	i;
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_pipeline	*pl;
-	int			status;
-
-	usage_check(argc, argv);
-	(void)envp;
-	(void)pl;
-	(void)status;
-	return (0);
+	if (!*arr)
+		return ;
+	i = 0;
+	while ((*arr)[i])
+		free((*arr)[i++]);
+	free(*arr);
+	*arr = NULL;
 }
