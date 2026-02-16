@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 16:58:45 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:24:53 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 18:57:13 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,23 @@ static char	*build_cmd_argv(char *s, int *i, t_parse_case *state)
 char	**cmd_tokenizer(char *cmd_str)
 {
 	char			**argv;
-	int				token_count;
 	t_parse_case	state;
-	int				i;
-	int				index;
+	t_token			token;
 
-	token_count = token_counter(cmd_str, &state);
+	token.count = token_counter(cmd_str, &state);
 	if (state != PARSE_OK)
 		return (NULL);
-	argv = (char **)malloc(sizeof(char *) * (token_count + 1));
+	argv = (char **)malloc(sizeof(char *) * (token.count + 1));
 	if (!argv)
 		return (NULL);
-	index = 0;
-	i = 0;
-	while (index < token_count)
+	token.index = 0;
+	token.i = 0;
+	while (token.index < token.count)
 	{
-		argv[index++] = build_cmd_argv(cmd_str, &i, &state);
+		argv[token.index++] = build_cmd_argv(cmd_str, &token.i, &state);
 		if (state != PARSE_OK)
 			return (free_array(&argv), NULL);
 	}
-	argv[index] = NULL;
+	argv[token.index] = NULL;
 	return (argv);
 }

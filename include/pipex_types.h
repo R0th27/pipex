@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:22 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:31:51 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 19:05:51 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_token
 	int	in_word;
 	int	count;
 	int	i;
+	int	index;
 }	t_token;
 
 typedef struct s_cmd
@@ -49,5 +50,12 @@ typedef struct s_pipeline
 	int			infile;
 	int			outfile;
 }	t_pipeline;
+
+typedef struct s_env
+{
+	int		argc;
+	char	**argv;
+	char	**envp;	
+}	t_env;
 
 #endif

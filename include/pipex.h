@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:34:18 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 19:01:57 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_in_type	detect_input_type(const char *arg);
 int			heredoc_read(int fd, const char *limiter);
 
 //free_up
+void		cmd_destroy(t_cmd **cmd);
 void		free_array(char ***arr);
 
 #endif
