@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 16:58:45 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:20:32 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 18:22:21 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ char	**cmd_tokenizer(char *cmd_str)
 		return (NULL);
 	index = 0;
 	i = 0;
-	while (i < token_count)
+	while (index < token_count)
 	{
-		argv[i++] = build_cmd_argv(cmd_str, &index, &state);
+		argv[index++] = build_cmd_argv(cmd_str, &i, &state);
 		if (state != PARSE_OK)
 			return (free_array(&argv), NULL);
 	}
-	argv[i] = NULL;
+	argv[index] = NULL;
 	return (argv);
 }
