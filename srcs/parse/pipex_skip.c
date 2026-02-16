@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 13:15:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 13:18:01 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/16 13:21:08 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	single_quotes_skip(char *s, int *index, t_parse_case *state)
 		(*index)++;
 		if (s[*index] == '\'')
 			quote_count++;
-		if (s[*index] == '\'' && (s[*index + 1] == ' ' || !s[*index + 1]))
+		if (s[*index] == '\'' && (!s[*index + 1]) || s[*index + 1] == ' ')
 			break ;
 	}
 	if (quote_count % 2 == 0)
