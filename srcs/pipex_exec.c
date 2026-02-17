@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 18:54:02 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/18 00:45:02 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 02:49:26 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ int	pipeline_exec(t_pipeline **pl)
 		fd_closure(&exec, *pl, 0);
 		exec.prev_fd = exec.pipefd[0];
 	}
-	return (wait_all_child(&exec), exec.status >> 8);
+	return (wait_all_child(&exec), WEXITSTATUS(exec.status));
 }
