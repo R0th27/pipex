@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/18 00:30:52 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 04:21:46 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			setup_input_fd(t_in_type type, const char *arg);
 int			setup_output_fd(t_in_type type, const char *arg);
 
 //fd
-void		safe_dup(t_exec *exec, t_pipeline *pl);
+int			safe_dup(t_exec *exec, t_pipeline *pl);
 int			safe_pipe(t_exec *exec, int last);
 void		fd_closure(t_exec *exec, t_pipeline *pl, int pipe_in);
 

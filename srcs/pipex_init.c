@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:44:50 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 22:10:23 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 04:18:27 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	env_init(int argc, char **argv, char **envp, t_env *env)
 	env->envp = envp;
 }
 
-static int	setup_io(t_env env, t_pipeline *pl)
+static void	setup_io(t_env env, t_pipeline *pl)
 {
 	int	start;
 
@@ -33,12 +33,11 @@ static int	setup_io(t_env env, t_pipeline *pl)
 			error_perror(env.argv[1]);
 		pl->infile = open("/dev/null", O_RDONLY);
 		if (pl->infile < 0)
-			return (STDIN_FILENO);
+			pl->infile = STDIN_FILENO;
 	}
 	pl->outfile = setup_output_fd(pl->io_type, env.argv[env.argc - 1]);
 	if (pl->outfile < 0)
-		return (error_perror(env.argv[env.argc - 1]), 0);
-	return (1);
+		error_perror(env.argv[env.argc - 1]);
 }
 
 int	pipeline_init(t_env env, t_pipeline **pl)
@@ -54,8 +53,7 @@ int	pipeline_init(t_env env, t_pipeline **pl)
 	(*pl)->infile = -1;
 	(*pl)->outfile = -1;
 	(*pl)->envp = env.envp;
-	if (!setup_io(env, *pl))
-		return (pipeline_destroy(pl), 0);
+	setup_io(env, *pl);
 	return (1);
 }
 

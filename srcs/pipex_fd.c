@@ -6,22 +6,34 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 23:56:27 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/18 00:24:18 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 04:41:32 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	safe_dup(t_exec *exec, t_pipeline *pl)
+int	safe_dup(t_exec *exec, t_pipeline *pl)
 {
+	int	in_fd;
+	int	out_fd;
+
 	if (exec->i == 0)
-		dup2(pl->infile, STDIN_FILENO);
+		in_fd = pl->infile;
 	else
-		dup2(exec->prev_fd, STDIN_FILENO);
+		in_fd = exec->prev_fd;
+	if (dup2(in_fd, STDIN_FILENO) == -1)
+		return (0);
 	if (exec->i == (pl->cmd_counts - 1))
-		dup2(pl->outfile, STDOUT_FILENO);
+	{
+		if (pl->outfile < 0)
+			return (0);
+		out_fd = pl->outfile;
+	}
 	else
-		dup2(exec->pipefd[1], STDOUT_FILENO);
+		out_fd = exec->pipefd[1];
+	if (dup2(out_fd, STDOUT_FILENO) == -1)
+		return (0);
+	return (1);
 }
 
 int	safe_pipe(t_exec *exec, int last)

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 18:54:02 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/18 02:49:26 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 04:51:00 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ static void	exec_engine(t_pipeline **pl, t_exec *exec)
 {
 	int	saved_errno;
 
-	safe_dup(exec, *pl);
+	if (!safe_dup(exec, *pl))
+	{
+		fd_closure(exec, *pl, 1);
+		pipeline_destroy(pl);
+		exit(1);
+	}
 	fd_closure(exec, *pl, 1);
 	saved_errno = exec_cmd((*pl)->cmds[exec->i], (*pl)->envp);
 	pipeline_destroy(pl);
@@ -69,5 +74,5 @@ int	pipeline_exec(t_pipeline **pl)
 		fd_closure(&exec, *pl, 0);
 		exec.prev_fd = exec.pipefd[0];
 	}
-	return (wait_all_child(&exec), WEXITSTATUS(exec.status));
+	return (wait_all_child(&exec), exec.status >> 8);
 }
