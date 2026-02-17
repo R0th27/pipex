@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 14:28:26 by htoe              #+#    #+#              #
-#    Updated: 2026/02/18 00:35:28 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/18 04:04:45 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,19 @@ SRCDIR = srcs
 OBJDIR = objs
 
 #Sources
-SRCS = ${wildcard ${SRCDIR}/*.c} \
-		${wildcard ${SRCDIR}/*/*.c}
+SRCS = \
+	${SRCDIR}/pipex.c \
+	${SRCDIR}/pipex_cmd.c \
+	${SRCDIR}/pipex_error.c \
+	${SRCDIR}/pipex_exec.c \
+	${SRCDIR}/pipex_fd.c \
+	${SRCDIR}/pipex_freeup.c \
+	${SRCDIR}/pipex_init.c \
+	${SRCDIR}/pipex_io.c \
+	${SRCDIR}/pipex_paths.c \
+	${SRCDIR}/pipex_tokenizer.c \
+	${SRCDIR}/pipex_utils.c
+	
 OBJS = ${SRCS:${SRCDIR}/%.c=${OBJDIR}/%.o}
 LIBS = libft/libft.a
 
