@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:32:27 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:32:38 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 13:38:46 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	error_usage(void)
 	error_print("Usage", "./pipex file1 cmd1 cmd2 file2\n");
 	error_print("Usage", "./pipex file1 cmd1 cmd2 ... cmdx file2\n");
 	error_print("Usage", "./pipex here_doc LIMITER cmd1 ... cmd2 file2\n");
+}
+
+void	error_cmd_not_found(const char *cmd)
+{
+	error_print(cmd, "command not found\n");
 }
 
 void	error_print(const char *target, const char *message)
