@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 14:07:40 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 16:18:04 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void		error_print(const char *target, const char *message);
 void		error_perror(const char *target);
 int			error_code_from_errno(int err);
 void		error_cmd_not_found(const char *cmd);
+
+//io
+int			setup_input_fd(t_in_type type, const char *arg);
+int			setup_output_fd(t_in_type type, const char *arg);
 
 //utils
 t_in_type	detect_input_type(const char *arg);

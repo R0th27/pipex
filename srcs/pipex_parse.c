@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:44:50 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 14:09:06 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 16:14:56 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,19 @@ int	pipeline_init(t_env env, t_pipeline **pl)
 
 int	parse_pipeline(t_env env, t_pipeline *pl)
 {
-	(void)env;
-	(void)pl;
+	int	start;
+
+	start = 1 + (pl->io_type == INPUT_HEREDOC);
+	pl->infile = setup_input_fd(pl->io_type, env.argv[start]);
+	if (pl->infile < 0)
+	{
+		if (pl->io_type == INPUT_HEREDOC)
+			error_perror("heredoc");
+		else
+			error_perror(env.argv[1]);
+	}
+	pl->outfile = setup_output_fd(pl->io_type, env.argv[env.argc - 1]);
+	if (pl->outfile < 0)
+		return (error_perror(env.argv[env.argc - 1]), 0);
 	return (0);
 }
