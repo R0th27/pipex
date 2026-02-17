@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 14:28:26 by htoe              #+#    #+#              #
-#    Updated: 2026/02/16 11:15:45 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/18 00:35:28 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 .DEFAULT_GOAL := all
 
 #Compilation & Commands
-NAME=a.out
+NAME=pipex
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 CINCLUDES = -Iinclude -Ilibft/include

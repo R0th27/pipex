@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 19:08:14 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 00:30:52 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 //init + parse
 void		env_init(int argc, char **argv, char **envp, t_env *env);
 int			pipeline_init(t_env env, t_pipeline **pl);
-int			setup_io(t_env env, t_pipeline *pl);
 
 //cmd + token
 int			pipeline_fill(t_env env, t_pipeline *pl);
@@ -38,7 +37,8 @@ char		**extract_path_dirs(char **envp);
 char		**build_paths(char *cmd, char **dirs, t_error *err);
 
 //exec
-int			pipeline_exec(t_pipeline **pl, t_env env);
+int			pipeline_exec(t_pipeline **pl);
+int			exec_cmd(t_cmd cmd, char **envp);
 
 //error
 void		error_usage(void);
@@ -50,6 +50,11 @@ void		error_cmd_not_found(const char *cmd);
 //io
 int			setup_input_fd(t_in_type type, const char *arg);
 int			setup_output_fd(t_in_type type, const char *arg);
+
+//fd
+void		safe_dup(t_exec *exec, t_pipeline *pl);
+int			safe_pipe(t_exec *exec, int last);
+void		fd_closure(t_exec *exec, t_pipeline *pl, int pipe_in);
 
 //utils
 t_in_type	detect_input_type(const char *arg);

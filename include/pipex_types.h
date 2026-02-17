@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:22 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 19:09:33 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 23:55:03 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ typedef struct s_token
 
 typedef struct s_exec
 {
-	int		saved_errno;
+	int		i;
 	int		status;
 	pid_t	last_pid;
 	pid_t	pid;
+	int		pipefd[2];
+	int		prev_fd;
 }	t_exec;
 
 typedef struct s_cmd
@@ -60,6 +62,7 @@ typedef struct s_pipeline
 {
 	t_cmd		*cmds;
 	int			cmd_counts;
+	char		**envp;
 	t_in_type	io_type;
 	int			infile;
 	int			outfile;
