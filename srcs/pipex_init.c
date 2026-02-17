@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_parse.c                                      :+:      :+:    :+:   */
+/*   pipex_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:44:50 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 16:14:56 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 18:27:00 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	pipeline_init(t_env env, t_pipeline **pl)
 	return (1);
 }
 
-int	parse_pipeline(t_env env, t_pipeline *pl)
+int	setup_io(t_env env, t_pipeline *pl)
 {
 	int	start;
 
@@ -50,5 +50,31 @@ int	parse_pipeline(t_env env, t_pipeline *pl)
 	pl->outfile = setup_output_fd(pl->io_type, env.argv[env.argc - 1]);
 	if (pl->outfile < 0)
 		return (error_perror(env.argv[env.argc - 1]), 0);
-	return (0);
+	return (1);
+}
+
+int	pipeline_fill(t_env env, t_pipeline *pl)
+{
+	int		i;
+	int		start;
+	char	**dirs;
+	t_error	err;
+
+	err = ERR_OK;
+	dirs = extract_path_dirs(env.envp);
+	start = 2 + (pl->io_type == INPUT_HEREDOC);
+	i = 0;
+	while (i < pl->cmd_counts)
+	{
+		pl->cmds[i].argv = cmd_tokenizer(env.argv[start], &err);
+		if (err != ERR_OK)
+			return (free_array(&dirs), error_perror("malloc"), 0);
+		if (pl->cmds[i].argv)
+			pl->cmds[i].paths = build_paths(pl->cmds[i].argv[0], dirs, &err);
+		if (err != ERR_OK)
+			return (free_array(&dirs), error_perror("malloc"), 0);
+		i++;
+		start++;
+	}
+	return (free_array(&dirs), 1);
 }

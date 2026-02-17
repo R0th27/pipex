@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:37 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 14:07:07 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 17:47:01 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ int	main(int argc, char **argv, char **envp)
 	env_init(argc, argv, envp, &env);
 	if (!pipeline_init(env, &pl))
 		return (1);
-	if (!parse_pipeline(env, pl))
+	if (!setup_io(env, pl))
 		return (pipeline_destroy(&pl), 1);
+	if (!pipeline_fill(env, pl))
+		return (pipeline_destroy(&pl), 1);
+	pipeline_display(pl);
+	pipeline_destroy(&pl);
 	status = 0;
 	return (status);
 }

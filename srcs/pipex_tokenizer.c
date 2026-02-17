@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 16:58:45 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 18:57:13 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 18:14:24 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*build_cmd_argv(char *s, int *i, t_parse_case *state)
 	return (buffer);
 }
 
-char	**cmd_tokenizer(char *cmd_str)
+char	**cmd_tokenizer(char *cmd_str, t_error *err)
 {
 	char			**argv;
 	t_parse_case	state;
@@ -91,18 +91,18 @@ char	**cmd_tokenizer(char *cmd_str)
 
 	token.count = token_counter(cmd_str, &state);
 	if (state != PARSE_OK)
-		return (NULL);
+		return (*err = ERR_OK, NULL);
 	argv = (char **)malloc(sizeof(char *) * (token.count + 1));
 	if (!argv)
-		return (NULL);
+		return (*err = ERR_MALLOC, NULL);
 	token.index = 0;
 	token.i = 0;
 	while (token.index < token.count)
 	{
 		argv[token.index++] = build_cmd_argv(cmd_str, &token.i, &state);
 		if (state != PARSE_OK)
-			return (free_array(&argv), NULL);
+			return (free_array(&argv), *err = ERR_MALLOC, NULL);
 	}
 	argv[token.index] = NULL;
-	return (argv);
+	return (*err = ERR_OK, argv);
 }

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:22 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/16 19:05:51 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 17:15:59 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ typedef enum e_parse_case
 	PARSE_BACKSLASH,
 	PARSE_MALLOC_FAIL
 }	t_parse_case;
+
+typedef enum e_error
+{
+	ERR_OK,
+	ERR_MALLOC
+}	t_error;
 
 typedef enum e_in_type
 {

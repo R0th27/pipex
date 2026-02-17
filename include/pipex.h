@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 16:18:04 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 17:47:31 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@
 //init + parse
 void		env_init(int argc, char **argv, char **envp, t_env *env);
 int			pipeline_init(t_env env, t_pipeline **pl);
-int			parse_pipeline(t_env env, t_pipeline *pl);
+int			setup_io(t_env env, t_pipeline *pl);
 
 //cmd + token
-char		**cmd_tokenizer(char *cmd_str);
+int			pipeline_fill(t_env env, t_pipeline *pl);
+char		**cmd_tokenizer(char *cmd_str, t_error *err);
+
+//paths
+char		**extract_path_dirs(char **envp);
+char		**build_paths(char *cmd, char **dirs, t_error *err);
 
 //error
 void		error_usage(void);
@@ -51,5 +56,8 @@ int			heredoc_read(int fd, const char *limiter);
 void		pipeline_destroy(t_pipeline **pl);
 void		cmd_destroy(t_cmd *cmd);
 void		free_array(char ***arr);
+
+//print
+void		pipeline_display(t_pipeline *pl);
 
 #endif
