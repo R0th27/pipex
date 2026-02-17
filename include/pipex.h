@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 17:47:31 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 19:08:14 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ char		**cmd_tokenizer(char *cmd_str, t_error *err);
 //paths
 char		**extract_path_dirs(char **envp);
 char		**build_paths(char *cmd, char **dirs, t_error *err);
+
+//exec
+int			pipeline_exec(t_pipeline **pl, t_env env);
 
 //error
 void		error_usage(void);

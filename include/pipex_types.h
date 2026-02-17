@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:58:22 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 17:15:59 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 19:09:33 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ typedef struct s_token
 	int	i;
 	int	index;
 }	t_token;
+
+typedef struct s_exec
+{
+	int		saved_errno;
+	int		status;
+	pid_t	last_pid;
+	pid_t	pid;
+}	t_exec;
 
 typedef struct s_cmd
 {

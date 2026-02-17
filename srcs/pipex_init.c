@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:44:50 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 18:27:00 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 19:03:04 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	setup_io(t_env env, t_pipeline *pl)
 			error_perror("heredoc");
 		else
 			error_perror(env.argv[1]);
+		pl->infile = open("/dev/null", O_RDONLY);
 	}
 	pl->outfile = setup_output_fd(pl->io_type, env.argv[env.argc - 1]);
 	if (pl->outfile < 0)
