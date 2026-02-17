@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 13:56:22 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/17 14:07:40 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-//parse
+//init + parse
+void		env_init(int argc, char **argv, char **envp, t_env *env);
+int			pipeline_init(t_env env, t_pipeline **pl);
+int			parse_pipeline(t_env env, t_pipeline *pl);
+
+//cmd + token
 char		**cmd_tokenizer(char *cmd_str);
 
 //error
