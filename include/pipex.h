@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/18 11:27:20 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 13:23:04 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 //init + parse
 void		env_init(int argc, char **argv, char **envp, t_env *env);
 int			pipeline_init(t_env env, t_pipeline **pl);
+void		setup_io(t_env env, t_pipeline *pl);
 
 //cmd + token
 int			pipeline_fill(t_env env, t_pipeline *pl);
@@ -41,7 +42,7 @@ int			pipeline_exec(t_pipeline **pl);
 int			exec_cmd(t_cmd cmd, char **envp);
 
 //error
-void		error_usage(void);
+void		error_usage(int bonus);
 void		error_print(const char *target, const char *message);
 void		error_perror(const char *target);
 void		error_cmd_not_found(const char *cmd);

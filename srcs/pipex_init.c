@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:44:50 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/18 04:18:27 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 13:03:38 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	env_init(int argc, char **argv, char **envp, t_env *env)
 	env->envp = envp;
 }
 
-static void	setup_io(t_env env, t_pipeline *pl)
+void	setup_io(t_env env, t_pipeline *pl)
 {
 	int	start;
 

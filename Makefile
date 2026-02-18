@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 14:28:26 by htoe              #+#    #+#              #
-#    Updated: 2026/02/18 11:28:10 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/18 13:26:14 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,20 @@ OBJDIR = objs
 
 #Sources
 SRCS = \
-	${SRCDIR}/pipex.c \
+	${SRCDIR}/pipex_mandatory.c \
+	${SRCDIR}/pipex_cmd.c \
+	${SRCDIR}/pipex_error.c \
+	${SRCDIR}/pipex_exec.c \
+	${SRCDIR}/pipex_fd.c \
+	${SRCDIR}/pipex_freeup.c \
+	${SRCDIR}/pipex_init.c \
+	${SRCDIR}/pipex_io.c \
+	${SRCDIR}/pipex_paths.c \
+	${SRCDIR}/pipex_tokenizer.c \
+	${SRCDIR}/pipex_utils.c
+
+BSRCS = \
+	${SRCDIR}/pipex_bonus.c \
 	${SRCDIR}/pipex_cmd.c \
 	${SRCDIR}/pipex_error.c \
 	${SRCDIR}/pipex_exec.c \
@@ -40,6 +53,7 @@ SRCS = \
 	${SRCDIR}/pipex_utils.c
 	
 OBJS = ${SRCS:${SRCDIR}/%.c=${OBJDIR}/%.o}
+BOBJS = ${BSRCS:${SRCDIR}/%.c=${OBJDIR}/%.o}
 LIBS = libft/libft.a
 
 #Pattern Rules
@@ -59,6 +73,12 @@ ${NAME}: Makefile ${OBJS} ${LIBS}
 	
 all: ${NAME}
 
+bonus:	Makefile ${BOBJS} ${LIBS}
+	@echo "COMPILING CHECKER"
+	@echo "LINKING CHECKER"
+	@${CC} ${BOBJS} ${LIBFLAGS} -o ${NAME}
+	@echo "FINISHED"
+
 clean:
 	@echo "CLEANING"
 	@${RM} ${OBJDIR}
@@ -70,4 +90,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

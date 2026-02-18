@@ -6,17 +6,21 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 18:32:27 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/17 13:38:46 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 13:25:05 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error_usage(void)
+void	error_usage(int bonus)
 {
-	error_print("Usage", "./pipex file1 cmd1 cmd2 file2\n");
-	error_print("Usage", "./pipex file1 cmd1 cmd2 ... cmdx file2\n");
-	error_print("Usage", "./pipex here_doc LIMITER cmd1 ... cmd2 file2\n");
+	if (!bonus)
+		error_print("Usage", "./pipex file1 cmd1 cmd2 file2\n");
+	else
+	{
+		error_print("Usage", "./pipex file1 cmd1 cmd2 ... cmdx file2\n");
+		error_print("Usage", "./pipex here_doc LIMITER cmd1 ... cmdx file2\n");
+	}
 }
 
 void	error_cmd_not_found(const char *cmd)
