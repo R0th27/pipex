@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:57:33 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/18 04:21:46 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/18 11:27:20 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int			exec_cmd(t_cmd cmd, char **envp);
 void		error_usage(void);
 void		error_print(const char *target, const char *message);
 void		error_perror(const char *target);
-int			error_code_from_errno(int err);
 void		error_cmd_not_found(const char *cmd);
+int			error_code_from_errno(int err);
 
 //io
 int			setup_input_fd(t_in_type type, const char *arg);
@@ -64,8 +64,5 @@ int			heredoc_read(int fd, const char *limiter);
 void		pipeline_destroy(t_pipeline **pl);
 void		cmd_destroy(t_cmd *cmd);
 void		free_array(char ***arr);
-
-//print
-void		pipeline_display(t_pipeline *pl);
 
 #endif

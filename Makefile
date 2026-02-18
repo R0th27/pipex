@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 14:28:26 by htoe              #+#    #+#              #
-#    Updated: 2026/02/18 04:04:45 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/18 11:28:10 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,11 +62,11 @@ all: ${NAME}
 clean:
 	@echo "CLEANING"
 	@${RM} ${OBJDIR}
-#@make clean -s -C libft
+	@make clean -s -C libft
 
 fclean: clean
 	@${RM} ${NAME}
-#@make fclean -s -C libft
+	@make fclean -s -C libft
 
 re: fclean all
 
